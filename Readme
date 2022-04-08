@@ -1,0 +1,8 @@
+Functionalities
+
+ADMIN CRUD:
+  Can Edit Roles
+  Can Edit Books
+SESSION MANAGEMENT:
+  No role can access other page
+Student can issue/reissue book
