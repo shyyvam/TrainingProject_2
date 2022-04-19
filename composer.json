@@ -6,7 +6,7 @@
         "framework",
         "laravel"
     ],
-    "license": "MIT",
+    "license": "RTDS",
     "require": {
         "php": "^7.0.33",
         "fideloper/proxy": "^4.0",
