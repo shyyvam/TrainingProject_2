@@ -28,9 +28,9 @@ Route::group(['middleware'=>['auth','admin']], function(){
       return view('admin.dashboard');
   });
   Route::get('/role-register','Admin\DashboardController@registered');
-  Route::get('/role-edit/{id}','Admin\DashboardController@registeredit');
-  Route::put('role-register-update/{id}','Admin\DashboardController@registerupdate');
-  Route::delete('/role-delete/{id}','Admin\DashboardController@registerdelete');
+  Route::get('/role-edit/{id}','Admin\DashboardController@registerEdit');
+  Route::put('role-register-update/{id}','Admin\DashboardController@registerUpdate');
+  Route::delete('/role-delete/{id}','Admin\DashboardController@registerDelete');
   Route::get('/abouts','Admin\AboutusController@index');
   Route::get('/books','Admin\BooksController@index');
   Route::post('/save-books','Admin\BooksController@save');
@@ -49,10 +49,10 @@ Route::group(['middleware'=>['auth','student']], function(){
   });
 
   Route::get('/studentprofile/{id}','Nonadmin\DashboardController@index');
-  Route::put('/student-profile-update/{id}','Nonadmin\DashboardController@profileupdate');
-  Route::get('/studentbooks','IssueController@studentindex');
-  Route::get('/issueupdate/{book_id}','IssueController@issue_update');
-  Route::get('/reissueupdate/{id}/{book_id}','IssueController@reissue_update');
-  Route::get('/finebooks','IssueController@finebooks');
+  Route::put('/student-profile-update/{id}','Nonadmin\DashboardController@profileUpdate');
+  Route::get('/studentbooks','IssueController@studentIndex');
+  Route::get('/issueupdate/{book_id}','IssueController@issue_Update');
+  Route::get('/reissueupdate/{id}/{book_id}','IssueController@reissue_Update');
+  Route::get('/finebooks','IssueController@fineBooks');
   Route::delete('/return/{id}/{book_id}','IssueController@return');
 });
