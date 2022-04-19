@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Books;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +12,6 @@ class BooksController extends Controller
     public function index()
     {
       $books = Books::paginate(5);
-
       return view('admin.books')->with('books',$books);
     }
     public function save(Request $request)
@@ -46,11 +46,11 @@ class BooksController extends Controller
       $books->delete();
       return redirect('books')->with('status','Data Deleted for Books');
     }
-    public function search()
+    public function search(Request $request)
     {
-      $search_text = $_GET['query'];
-      $books = Books::where('book_name','LIKE','%'.$search_text.'%')->with('book_subject')->get();
-      return view('admin.booksearch',compact('books'));
+      $search = $request->get('search');
+      $books = DB::table('books')->where('book_name','like','%'.$search.'%')->paginate(5);
+      return view('admin.books',['books'=>$books]);
     }
 
 }
