@@ -28,35 +28,32 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          CT
-        </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
-        </a>
+        <p class="simple-text logo-normal" style="text-align=center;">
+          Library
+        </p>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li>
-            <a href="#">
+          <li class="{{'student-dashboard' == request()->path()?'active':''}}">
+            <a href="{{url('student-dashboard')}}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="/studentprofile">
+          <li class="{{'studentprofile/'.Auth::user()->id == request()->path()?'active':''}}">
+            <a href="{{url('studentprofile/'.Auth::user()->id)}}">
               <i class="now-ui-icons users_single-02"></i>
               <p>Profile</p>
             </a>
           </li>
-          <li class="active ">
-            <a href="./tables.html">
+          <li class="{{'studentbooks/'.Auth::user()->id == request()->path()?'active':''}}">
+            <a href="{{url('studentbooks')}}">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>Books</p>
             </a>
           </li>
-          <li>
-            <a href="/studentbooks">
+          <li class="{{'finebooks/'.Auth::user()->id == request()->path()?'active':''}}">
+            <a href="{{url('finebooks')}}">
               <i class="now-ui-icons text_caps-small"></i>
               <p>Fine</p>
             </a>
@@ -84,16 +81,6 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form type="get" action="{{url('/search')}}">
-              <div class="input-group no-border">
-                <input name="query" type="search" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="#pablo">

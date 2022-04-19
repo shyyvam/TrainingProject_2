@@ -286,27 +286,3 @@ You are logged in as {{Auth::user()->usertype}}!
 <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="../assets/demo/demo.js"></script>
 @endsection
-
-@section('footer')
-<div class=" container-fluid ">
-  <nav>
-    <ul>
-      <li>
-        <a href="https://www.creative-tim.com">
-          Library
-        </a>
-      </li>
-      <li>
-        <a href="http://presentation.creative-tim.com">
-          About Us
-        </a>
-      </li>
-      <li>
-        <a href="http://blog.creative-tim.com">
-          Blog
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-@endsection

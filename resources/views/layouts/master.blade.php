@@ -43,8 +43,8 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="./icons.html">
+          <li class="{{'fine' == request()->path()?'active':''}}">
+            <a href="/fine">
               <i class="now-ui-icons education_atom"></i>
               <p>Fine Details</p>
             </a>
@@ -90,16 +90,6 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form type="get" action="{{url('/search')}}">
-              <div class="input-group no-border">
-                <input name="query" type="search" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="#pablo">
