@@ -15,12 +15,12 @@ class CreateIssueTable extends Migration
     {
         Schema::create('issue', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('u_id')->unsigned();
+            $table->bigIncrements('u_id')->unsigned();
             $table->foreign('u_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('b_id')->unsigned();
+            $table->bigIncrements('b_id')->unsigned();
             $table->foreign('b_id')->references('book_id')->on('books')->onDelete('cascade');
-            $table->date('issue_date');
-            $table->date('return_date')->nullable();
+            $table->string('issue_date');
+            $table->string('return_date')->nullable();
             $table->string('issue_status')->nullable();
             $table->timestamp('return_day')->nullable();
             $table->timestamps();
