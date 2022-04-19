@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="card-body">
   <div class="table-responsive">
     <table id="datatable" class="table table-stripped">

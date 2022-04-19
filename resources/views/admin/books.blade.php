@@ -92,6 +92,15 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
+          <div class="col-md-6">
+            <form action="/search" method="get">
+              <div class="input-group">
+                <input type="search" name="search" class="form-control">
+                <span class="input-group-prepend">
+                  <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+            </form>
+          </div>
           <table id="datatable" class="table table-stripped">
             <thead class=" text-primary">
               <th>Id</th>

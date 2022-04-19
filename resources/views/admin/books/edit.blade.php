@@ -16,19 +16,19 @@ Books Edit
             {{method_field('PUT')}}
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Book Title:</label>
-              <input type="text" name="title" class="form-control" value="{{$books->book_name}}">
+              <input type="text" name="title" class="form-control" value="{{$books->book_name}}" required>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Book Author:</label>
-              <input type="text" name="author" class="form-control" value="{{$books->book_author}}">
+              <input type="text" name="author" class="form-control" value="{{$books->book_author}}" required>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Book Version:</label>
-              <input type="text" name="version" class="form-control" value="{{$books->book_version}}">
+              <input type="text" name="version" class="form-control" value="{{$books->book_version}}" required>
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Book Subject:</label>
-              <input type="text" name="subject" class="form-control" value="{{$books->book_subject}}">
+              <input type="text" name="subject" class="form-control" value="{{$books->book_subject}}" required>
             </div>
         </div>
         <div class="modal-footer">
