@@ -36,4 +36,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //FUNCTIONS
+    public static function registerEdit($id)
+    {
+      $users = User::findOrFail($id);
+      return $users;
+    }
+
+    public static function registerUpdate($request,$id)
+    {
+      $users=User::find($id);
+      $users->name=$request->input('username');
+      $users->usertype=$request->input('usertype');
+      $users->update();
+    }
+
+    public static function registerDelete($id)
+    {
+      $users = User::findOrFail($id);
+      $users->delete();
+    }
+
+    public static function profileUpdate($request,$id)
+    {
+      $users=User::find($id);
+      $users->name=$request->input('username');
+      $users->email=$request->input('email');
+      $users->phone_number=$request->input('phone_number');
+      $users->update();
+      return $users;
+    }
 }

@@ -16,13 +16,9 @@ class DashboardController extends Controller
       $users=User::find($id);
       return view('nonadmin.profile')->with('users',$users);
     }
-    public function profileupdate(Request $request,$id)
+    public function profileUpdate(Request $request,$id)
     {
-      $users=User::find($id);
-      $users->name=$request->input('username');
-      $users->email=$request->input('email');
-      $users->phone_number=$request->input('phone_number');
-      $users->update();
+      $users=User::profileUpdate($request,$id);
       return view('nonadmin.profile')->with('users',$users)->with('status','Your profile is Updated');
     }
 
