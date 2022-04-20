@@ -33,6 +33,9 @@
                 <td>{{$row->book_name}}</td>
                 <td>{{$row->fine}}</td>
                 <td>
+                  <a href="/reissueupdate/{{$row->id}}/{{$row->book_id}}" class="btn btn-success">Reissue</a>
+                </td>
+                <td>
                   <form action="/return/{{$row->id}}/{{$row->book_id}}" method="POST">
                     {{csrf_field()}}
                     {{method_field('DELETE')}}

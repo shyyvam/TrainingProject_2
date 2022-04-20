@@ -48,13 +48,13 @@
           </li>
           <li class="{{'studentbooks/'.Auth::user()->id == request()->path()?'active':''}}">
             <a href="{{url('studentbooks')}}">
-              <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Books</p>
+              <i class="fas fa-book"></i>
+              <p>Books Issue</p>
             </a>
           </li>
           <li class="{{'finebooks/'.Auth::user()->id == request()->path()?'active':''}}">
             <a href="{{url('finebooks')}}">
-              <i class="now-ui-icons text_caps-small"></i>
+              <i class="fas fa-rupee-sign"></i>
               <p>Fine</p>
             </a>
           </li>
@@ -85,9 +85,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="#pablo">
                   <i class="now-ui-icons media-2_sound-wave"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
                 </a>
               </li>
               <li class="nav-item dropdown">

@@ -25,19 +25,19 @@
           {{csrf_field()}}
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Book Title:</label>
-            <input type="text" name="title" class="form-control" id="recipient-name">
+            <input type="text" name="title" class="form-control" id="recipient-name" required>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Book Author:</label>
-            <input type="text" name="author" class="form-control" id="recipient-name">
+            <input type="text" name="author" class="form-control" id="recipient-name" required>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Book Version:</label>
-            <input type="text" name="version" class="form-control" id="recipient-name">
+            <input type="text" name="version" class="form-control" id="recipient-name" required>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Book Subject:</label>
-            <input type="text" name="subject" class="form-control" id="recipient-name">
+            <input type="text" name="subject" class="form-control" id="recipient-name" required>
           </div>
       </div>
       <div class="modal-footer">

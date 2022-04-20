@@ -30,12 +30,8 @@
                 <td>{{$row->book_id}}</td>
                 <td>{{$row->book_name}}</td>
                 <td>
-                  <a href="/issueupdate/{{$row->book_id}}" class="btn btn-success">Issue</a>
+                  <a href="/issueupdate/{{$row->book_id}}" class="btn btn-success" >Issue</a>
                 </td>
-                <td>
-                  <a href="/reissueupdate/{{$row->id}}/{{$row->book_id}}" class="btn btn-danger">Reissue</a>
-                </td>
-
               </tr>
               @endforeach
             </tbody>
