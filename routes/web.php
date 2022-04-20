@@ -47,7 +47,6 @@ Route::group(['middleware'=>['auth','student']], function(){
   Route::get('/student-dashboard', function () {
       return view('nonadmin.dashboard');
   });
-
   Route::get('/studentprofile/{id}','Nonadmin\DashboardController@index');
   Route::put('/student-profile-update/{id}','Nonadmin\DashboardController@profileUpdate');
   Route::get('/studentbooks','IssueController@studentIndex');
@@ -55,4 +54,6 @@ Route::group(['middleware'=>['auth','student']], function(){
   Route::get('/reissueupdate/{id}/{book_id}','IssueController@reissue_Update');
   Route::get('/finebooks','IssueController@fineBooks');
   Route::delete('/return/{id}/{book_id}','IssueController@return');
+  
+
 });
