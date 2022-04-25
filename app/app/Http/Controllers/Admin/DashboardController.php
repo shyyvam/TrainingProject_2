@@ -13,28 +13,31 @@ class DashboardController extends Controller
       return view('admin.dashboard');
     }
 
-    public function registered()
+    public function showUsers()
     {
-      $users = User::all();
-      return view('admin.register')->with('users',$users);
+      $users        = User::all();
+      return view('admin.register')
+            ->with('users',$users);
     }
 
     public function registerEdit($id)
     {
-      $users=User::registerEdit($id);
-      return view('admin.register-edit')->with('users',$users);
+      $users        = User::registerEdit($id);
+      return view('admin.register-edit')
+            ->with('users',$users);
     }
 
     public function registerUpdate(Request $request, $id)
     {
       User::registerUpdate($request,$id);
-      return redirect('/role-register')->with('status','Your data is Updated');
+      return redirect('/role-edit/'.$id);
     }
 
-    public function registerDelete($id)
+    public function Delete($id)
     {
       User::registerDelete($id);
-      return redirect('/role-register')->with('status','Your data is Updated');
+      return redirect('/role-register')
+            ->with('status','Your data is Updated');
     }
 
 }

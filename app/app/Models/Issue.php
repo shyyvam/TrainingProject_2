@@ -54,7 +54,7 @@ class Issue extends Model
     return $data;
   }
   public static function createIssue($book_id) {
-      $this->validate();
+      //$this->validate();
       $issue              = new self();
       $date               = date("d.m.y");
       $issue->issue_date  = time();
@@ -72,7 +72,7 @@ class Issue extends Model
     $issue->return_date   = $return_date;
     return $issue->save();
   }
-  private function validate($data) {
+  /*private function validate($data) {
       foreach ($data as $attr => $value) {
           if (!in_array($attr, $this->fillable)) {
               throw new Exception(
@@ -80,7 +80,7 @@ class Issue extends Model
               );
           }
       }
-  }
+  }*/
   public static function fineBooks()
   {
     $books                = Books::all();
@@ -104,13 +104,11 @@ class Issue extends Model
     }
       return $data;
   }
-  public static function return($request,$id,$book_id)
+
+  public static function deleteIssue($id)
   {
     $issue                = Issue::findOrFail($id);
-    $books                = Books::findOrFail($book_id);
-    $books->status        = 'n';
-    $books->update();
-    $issue->delete();
+    return $issue->delete();
   }
 
 }
