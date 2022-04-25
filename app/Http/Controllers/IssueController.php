@@ -25,11 +25,7 @@ class IssueController extends Controller
     $data=Issue::adminFine();
     return view('admin.fine',compact('data'));
   }
-  public function issue_Update(Request $request,$book_id)
-  {
-    Issue::issueUpdate($request,$book_id);
-    return redirect('/studentbooks')->with('status','Your book is issued');
-  }
+
   public function reissue_Update(Request $request,$id,$book_id)
   {
     Issue::reissueUpdate($request,$id,$book_id);
@@ -40,16 +36,10 @@ class IssueController extends Controller
     $data=Issue::fineBooks();
     return view('nonadmin.bookfine')->with('data',$data);
   }
+
   public function return(Request $request,$id,$book_id)
   {
     Issue::return($request,$id,$book_id);
     return redirect('/studentbooks')->with('status','Your book is returned');
   }
-
-
-
-
-
-
-
 }

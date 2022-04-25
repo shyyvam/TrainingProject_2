@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('nonadmin.dashboard');
+        return view('home');
+    }
+    public function show()
+    {
+      return view('welcome');
     }
 }
