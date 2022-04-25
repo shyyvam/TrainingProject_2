@@ -23,17 +23,25 @@ class DashboardController extends Controller
 
     public function index($id)
     {
-      $users     = User::find($id);
-      return view('nonadmin.profile')
-            ->with('users',$users);
+      try {
+        $users     = User::findOrFail($id);
+        return view('nonadmin.profile')
+              ->with('users',$users);
+      } catch (Exception $e) {
+        echo $e->getMessage();
+      }
     }
 
     public function profileUpdate(Request $request,$id)
     {
-      $users     = User::profileUpdate($request,$id);
-      return view('nonadmin.profile')
-            ->with('users',$users)
-            ->with('status','Your profile is Updated');
+      try {
+        $users     = User::profileUpdate($request,$id);
+        return view('nonadmin.profile')
+              ->with('users',$users)
+              ->with('status','Your profile is Updated');
+      } catch (Exception $e) {
+        echo $e->getMessage();
+      }
     }
 
 

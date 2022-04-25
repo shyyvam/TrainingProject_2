@@ -15,29 +15,41 @@ class DashboardController extends Controller
 
     public function showUsers()
     {
-      $users        = User::all();
-      return view('admin.register')
-            ->with('users',$users);
+      try {
+          $users        = User::all();
+          return view('admin.register')
+                ->with('users',$users);
+      } catch (Exception $e) {
+        echo $e->getMessage();
+      }
     }
 
     public function registerEdit($id)
     {
-      $users        = User::registerEdit($id);
-      return view('admin.register-edit')
-            ->with('users',$users);
+      try {
+          $users        = User::registerEdit($id);
+          return view('admin.register-edit')
+                ->with('users',$users);
+      } catch (Exception $e) {
+        echo $e->getMessage();
+      }
     }
 
     public function registerUpdate(Request $request, $id)
     {
-      User::registerUpdate($request,$id);
-      return redirect('/role-edit/'.$id);
+      try {
+          User::registerUpdate($request,$id);
+          return redirect('/role-edit/'.$id);
+      } catch (Exception $e) {
+        echo $e->getMessage();
+      }
     }
 
     public function Delete($id)
     {
-      User::registerDelete($id);
-      return redirect('/role-register')
-            ->with('status','Your data is Updated');
+          User::registerDelete($id);
+          return redirect('/role-register')
+                ->with('status','Your data is Updated');
     }
 
 }
