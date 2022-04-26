@@ -12,8 +12,8 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
+    protected $commands = [ 'App\Console\Commands\cronEmail'
+        //register command
     ];
 
     /**
@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('notify:email')
+                 ->weeklyOn(2,'10:50');
         // $schedule->command('inspire')
         //          ->hourly();
     }
