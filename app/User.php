@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -80,7 +81,7 @@ class User extends Authenticatable
 
     public static function profileUpdate($request,$id)
     {
-        $users=User::findOrFail($id);
+        $users              = User::findOrFail($id);
         $users->name        = $request->input('username');
         $users->email       = $request->input('email');
         $users->phone_number= $request->input('phone_number');

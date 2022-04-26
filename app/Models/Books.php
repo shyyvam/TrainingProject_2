@@ -95,6 +95,7 @@ class Books extends Model
     }
     public static function searchBooks($request)
     {
+      
       $search               = $request->get('search');
       $books                = DB::table('books')
                             ->where('book_name','like','%'.$search.'%')

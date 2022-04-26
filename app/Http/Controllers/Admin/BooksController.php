@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Books;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 
 
 class BooksController extends Controller
@@ -59,9 +60,10 @@ class BooksController extends Controller
         echo $e->getMessage();
       }
     }
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
       try {
+          $request->validate();
           $books    = Books::searchBooks($request);
           return view('admin.books',['books'=>$books]);
      } catch (Exception $e) {

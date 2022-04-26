@@ -13,6 +13,8 @@ use Auth;
 use DateTime;
 use DateInterval;
 use format;
+use App\http\Requests\profile;
+
 
 class DashboardController extends Controller
 {
@@ -32,9 +34,10 @@ class DashboardController extends Controller
       }
     }
 
-    public function profileUpdate(Request $request,$id)
+    public function profileUpdate(Profile $request,$id)
     {
       try {
+        $request->validate();
         $users     = User::profileUpdate($request,$id);
         return view('nonadmin.profile')
               ->with('users',$users)
