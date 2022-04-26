@@ -19,7 +19,7 @@ class cronEmail extends Command
      *
      * @var string
      */
-    protected $description = 'Sen emails every week';
+    protected $description = 'Send emails every week';
 
     /**
      * Create a new command instance.
@@ -38,6 +38,22 @@ class cronEmail extends Command
      */
     public function handle()
     {
-        //
+        $date = date('d/m/Y',strtotime('tomorrow'));
+        $result = DB::table('issue')
+                  ->join('users','issue.u_id','=','users.id')
+                  ->join('books','issue.b_id','=','books.book_id')
+                  ->select('books.book_name','users.name','issue.return_date')
+                  ->where('issue.return_date','=',$date)
+                  ->get();
+
+        Mail::send(['html'=>'email.cron-email'],array('result'=>$result),function($message)
+        {
+          $message->from('shivam12061999@gmail.com','Commit2Clean');
+
+          $message->subject('Notification for tomorrow return date'.'');
+
+          $message->to('shivam12061999@outlook.com')->cc('sharma@gmail.com');
+        }
+      );
     }
 }
