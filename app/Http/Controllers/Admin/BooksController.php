@@ -63,7 +63,7 @@ class BooksController extends Controller
     public function search(SearchRequest $request)
     {
       try {
-          $request->validate();
+          $request->validated();
           $books    = Books::searchBooks($request);
           return view('admin.books',['books'=>$books]);
      } catch (Exception $e) {

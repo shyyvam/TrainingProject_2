@@ -27,8 +27,8 @@ class Books extends Model
     {
       $validator = Validator::make($request -> all(),
          [
-           'title' => 'required|max:191|min:3',
-           'author' => 'required|max:191|min:3',
+           'title'   => 'required|max:191|min:3',
+           'author'  => 'required|max:191|min:3',
            'version' => 'required|max:191|numeric|min:1',
            'subject' => 'required|max:191|min:3',
          ]
@@ -62,8 +62,8 @@ class Books extends Model
     {
       $validator = Validator::make($request -> all(),
          [
-           'title' => 'required|max:191|min:3',
-           'author' => 'required|max:191|min:3',
+           'title'   => 'required|max:191|min:3',
+           'author'  => 'required|max:191|min:3',
            'version' => 'required|max:191|numeric|min:1',
            'subject' => 'required|max:191|min:3',
          ]
@@ -88,14 +88,20 @@ class Books extends Model
                 ->with('status','Data Updated for Books');
        }
     }
-    public function updateRecord($book_id) {
+    public static function updateRecord($book_id) {
         $book               = Books::findOrFail($book_id);
         $book->status       = 'y';
         return $book->save();
     }
+
+    public static function updateIssue($book_id) {
+        $book               = Books::findOrFail($book_id);
+        $book->status       = 'n';
+        return $book->save();
+    }
     public static function searchBooks($request)
     {
-      
+
       $search               = $request->get('search');
       $books                = DB::table('books')
                             ->where('book_name','like','%'.$search.'%')

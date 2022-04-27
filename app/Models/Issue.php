@@ -40,17 +40,7 @@ class Issue extends Model
                                     ->join('books','issue.b_id','=','books.book_id')
                                     ->select('issue.id','issue.fine','books.book_name','users.phone_number','users.email','issue.issue_date','issue.return_date')
                                     ->get();
-    foreach ($data as $d)
-    {
-          $date            = time();
-          $date            = (int)$date;
-          $returnDate      = (int)$d->return_date;
 
-          if($returnDate<$date)
-          {
-            $d->fine       = round((($date-$returnDate)/86400))*5;
-          }
-    }
     return $data;
   }
   public static function createIssue($book_id) {
@@ -65,7 +55,6 @@ class Issue extends Model
       return $issue->save();
   }
   public static function createReissue($book_id) {
-
     $issue                = Issue::findOrFail($book_id);
     $date                 = date("d.m.y");
     $return_date          = strtotime($date.'+7 days');
@@ -91,17 +80,7 @@ class Issue extends Model
                                   ->select('issue.id','books.book_id','issue.fine','books.book_name','users.phone_number','users.email','issue.issue_date','issue.return_date')
                                   ->where('users.id','=',Auth::user()->id)
                                   ->get();
-    //CALCULATE FINE
-    foreach ($data as $d)
-    {
-      $date               = time();
-      $date               = (int)$date;
-      $returnDate         = (int)$d->return_date;
-      if($returnDate < $date)
-      {
-        $d->fine          = round((($date-$returnDate)/86400))*5;
-      }
-    }
+
       return $data;
   }
 

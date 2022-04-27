@@ -37,7 +37,7 @@ class DashboardController extends Controller
     public function profileUpdate(Profile $request,$id)
     {
       try {
-        $request->validate();
+        $request->validated();
         $users     = User::profileUpdate($request,$id);
         return view('nonadmin.profile')
               ->with('users',$users)
@@ -68,22 +68,14 @@ class DashboardController extends Controller
 
       public function reissueBook($id,$book_id)
       {
-
-        DB::beginTransaction();
-
         try{
-          (new Issue())->createReissue($book_id);
-          (new Books())->updateRecord($book_id);
+          Issue::createReissue($book_id);
+          return view('nonadmin.bookfine')
+                 ->with('status','Your book is reissued');
         } catch (Exception $e) {
-          DB::rollback();
-          return redirect('/studentbooks')
+          return view('nonadmin.bookfine')
                  ->with('status','Your book is not reissued');
-
         }
-
-        DB::commit();
-        return redirect('/studentbooks')
-               ->with('status','Your book is reissued');
       }
 
       public function return(Request $request,$id,$book_id)
@@ -92,16 +84,16 @@ class DashboardController extends Controller
 
         try{
           (new Issue())->deleteIssue($id);
-          (new Books())->updateRecord($book_id);
+          (new Books())->updateIssue($book_id);
         } catch(Exception $e) {
 
           DB::rollback();
-          return redirect('/studentbooks')
+          return redirect('/finebooks')
                  ->with('status','Your book is not returned');
         }
 
         DB::commit();
-        return redirect('/studentbooks')
+        return redirect('/finebooks')
                ->with('status','Your book is returned');
       }
 

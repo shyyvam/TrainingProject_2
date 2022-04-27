@@ -32,17 +32,22 @@ class LoginController extends Controller
       //Admin Login
       if(Auth::user()->usertype == 'admin')
       {
-        return '/dashboard';
+        return 'dashboard';
       }
       //Student login
-      else if(Auth::user()->usertype == 'student')
+      if(Auth::user()->usertype == 'student')
       {
-        return '/student-dashboard';
+        return 'student-dashboard';
       }
 
-      else {
+      if(Auth::user()->usertype == NULL)
+      {
         return 'home';
       }
+    }
+    public function show()
+    {
+      return view('auth.login');
     }
     /**
      * Create a new controller instance.

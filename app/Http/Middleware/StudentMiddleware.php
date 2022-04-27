@@ -21,7 +21,7 @@ class StudentMiddleware
         return $next($request);
       }
       else {
-        return redirect('/home')->with('status','You are not allowed to Student Dashboard');
+        return redirect('/authenticity')->with('status','You are not allowed to Student Dashboard');
       }
     }
 }

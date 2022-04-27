@@ -23,23 +23,41 @@ class IssueController extends Controller
   public function fine()
   {
     $data=Issue::adminFine();
+    foreach ($data as $d)
+    {
+          $date            = time();
+          $date            = (int)$date;
+          $returnDate      = (int)$d->return_date;
+
+          if($returnDate<$date)
+          {
+            $d->fine       = round((($date-$returnDate)/86400))*5;
+          }
+          else {
+            $d->fine       = 0;
+          }
+    }
     return view('admin.fine',compact('data'));
   }
 
-  public function reissue_Update(Request $request,$id,$book_id)
-  {
-    Issue::reissueUpdate($request,$id,$book_id);
-    return redirect('/studentbooks')->with('status','Your book is reissued');
-  }
   public function fineBooks()
   {
     $data=Issue::fineBooks();
+    foreach ($data as $d)
+    {
+          $date            = time();
+          $date            = (int)$date;
+          $returnDate      = (int)$d->return_date;
+
+          if($returnDate<$date)
+          {
+            $d->fine       = round((($date-$returnDate)/86400))*5;
+          }
+          else {
+            $d->fine       = 0;
+          }
+    }
     return view('nonadmin.bookfine')->with('data',$data);
   }
 
-  public function return(Request $request,$id,$book_id)
-  {
-    Issue::return($request,$id,$book_id);
-    return redirect('/studentbooks')->with('status','Your book is returned');
-  }
 }
