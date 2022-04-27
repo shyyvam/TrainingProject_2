@@ -11,21 +11,24 @@
 |
 */
          //***START***
-  //Route::get('/','HomeController@show');
+  Route::get('/','auth\LoginController@show');
   Auth::routes();
+
   Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('/authenticity', 'HomeController@show');
+  //Route::get('/','Admin\DashboardController@show');
 
                     //**ADMIN**
 Route::group(['middleware'=>['auth','admin']], function(){
                     //**ADMIN-DASHBOARD**
-     Route::get('/','Admin\DashboardController@show');
+     //Route::get('/','Admin\DashboardController@show');
      Route::get('/dashboard','Admin\DashboardController@show');
 
                     //**ADMIN CRUD**
-     Route::get('/role-register','Admin\DashboardController@registered');
+     Route::get('/users','Admin\DashboardController@showUsers');
      Route::get('/role-edit/{id}','Admin\DashboardController@registerEdit');
-     Route::put('role-register-update/{id}','Admin\DashboardController@registerUpdate');
-     Route::delete('/role-delete/{id}','Admin\DashboardController@registerDelete');
+     Route::put('role-update/{id}','Admin\DashboardController@registerUpdate');
+     Route::delete('/user-delete/{id}','Admin\DashboardController@Delete');
 
                     //**ABOUT US PAGE**
      Route::get('/abouts','Admin\AboutusController@index');
@@ -33,7 +36,7 @@ Route::group(['middleware'=>['auth','admin']], function(){
                     //**BOOKS CRUD**
      Route::get('/books','Admin\BooksController@index');
      Route::post('/save-books','Admin\BooksController@save');
-     Route::get('/booksedit/{book_id}','Admin\BooksController@edit');
+     Route::get('/booksedit/{book_id}','Admin\BooksController@edit')->name('booksedit');
      Route::put('/books-update/{book_id}','Admin\BooksController@update');
      Route::delete('/books-delete/{book_id}','Admin\BooksController@delete');
      Route::get('/search','Admin\BooksController@search');
@@ -59,5 +62,5 @@ Route::group(['middleware'=>['auth','student']], function(){
                   //**BOOKS-REISSUE-RETURN**
      Route::get('/reissueupdate/{id}/{book_id}','Nonadmin\DashboardController@reissueBook');
      Route::get('/finebooks','IssueController@fineBooks');
-     Route::delete('/return/{id}/{book_id}','IssueController@return');
+     Route::match(['get', 'delete'],'/return/{id}/{book_id}','Nonadmin\DashboardController@return');
 });
