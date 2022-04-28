@@ -40,8 +40,8 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="{{'studentprofile/'.Auth::user()->id == request()->path()?'active':''}}">
-            <a href="{{url('studentprofile/'.Auth::user()->id)}}">
+          <li class="{{'student-profile/'.Auth::user()->id == request()->path()?'active':''}}">
+            <a href="{{url('student-profile/'.Auth::user()->id)}}">
               <i class="now-ui-icons users_single-02"></i>
               <p>Profile</p>
             </a>

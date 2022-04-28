@@ -55,8 +55,8 @@
               <p>Requests</p>
             </a>
           </li>
-          <li class="{{'role-register' == request()->path()?'active':''}}">
-            <a href="/role-register">
+          <li class="{{'users' == request()->path()?'active':''}}">
+            <a href="/users">
               <i class="now-ui-icons users_single-02"></i>
               <p>Users</p>
             </a>

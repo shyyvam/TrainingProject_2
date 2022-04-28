@@ -12,6 +12,7 @@
       <div class="card">
         <div class="card-header">
           <h3>Update Profile</h3>
+
           @if(session('status'))
             <div class="alert alert-success" role="alert">
               {{session('status')}}
@@ -26,15 +27,15 @@
                 {{method_field('PUT')}}
                 <div class="form-group">
                   <label>Name</label>
-                  <input type="text" name="username" value="{{$users->name}}" class="form-control">
+                  <input type="text" name="username" value="{{$users->name}}" class="form-control" required minlength="3">
                 </div>
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" name="email" value="{{$users->email}}" class="form-control">
+                  <input type="email" name="email" value="{{$users->email}}" class="form-control" required >
                 </div>
                 <div class="form-group">
                   <label>Phone</label>
-                  <input type="text" name="phone_number" value="{{$users->phone_number}}" class="form-control">
+                  <input type="text" name="phone_number" value="{{$users->phone_number}}" class="form-control" required minlength="10">
                 </div>
 
                 <button type="submit" class="btn btn-success">Update</button>

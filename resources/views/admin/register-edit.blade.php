@@ -12,11 +12,25 @@
       <div class="card">
         <div class="card-header">
           <h3>Edit Role for Registered Users</h3>
+          @if (session('status'))
+              <div class="alert alert-success" role="alert">
+                  {{ session('status') }}
+              </div>
+          @endif
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-              <form action="/role-register-update/{{$users->id}}" method="POST">
+              <form action="/role-update/{{$users->id}}" method="POST">
                 {{csrf_field()}}
                 {{method_field('PUT')}}
                 <div class="form-group">
@@ -31,7 +45,7 @@
                   </select>
                 </div>
                 <button type="submit" class="btn btn-success">Update</button>
-                <a href="/role-register" class="btn btn-danger">Cancel</a>
+                <a href="/users" class="btn btn-danger">Cancel</a>
               </form>
             </div>
           </div>

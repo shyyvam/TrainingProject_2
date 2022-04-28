@@ -11,6 +11,20 @@ Books Edit
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Books-Edit Data</h4>
+          @if (session('status'))
+              <div class="alert alert-success" role="alert">
+                  {{ session('status') }}
+              </div>
+          @endif
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
           <form action="{{ url('books-update/'.$books->book_id)}}" method="POST">
             {{csrf_field()}}
             {{method_field('PUT')}}

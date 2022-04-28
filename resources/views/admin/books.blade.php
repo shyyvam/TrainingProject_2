@@ -21,7 +21,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/save-books" method="POST">
+        @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+        <form action="/save-book" method="POST">
           {{csrf_field()}}
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Book Title:</label>
@@ -95,7 +104,7 @@
           <div class="col-md-6">
             <form action="/search" method="get">
               <div class="input-group">
-                <input type="search" name="search" class="form-control">
+                <input type="search" name="search" class="form-control" required>
                 <span class="input-group-prepend">
                   <button type="submit" class="btn btn-primary">Search</button>
               </div>
@@ -103,7 +112,8 @@
           </div>
           <table id="datatable" class="table table-stripped">
             <thead class=" text-primary">
-              <th>Id</th>
+            <?php $num=1; ?>
+              <th>S.No</th>
               <th>Book Name</th>
               <th>Book Author</th>
               <th>Book Version</th>
@@ -114,18 +124,19 @@
             <tbody>
               @foreach($books as $data)
               <tr>
-                <td>{{$data->book_id}}</td>
+                <td>{{$num}}</td>
                 <td>{{$data->book_name}}</td>
                 <td>{{$data->book_author}}</td>
                 <td>{{$data->book_version}}</td>
                 <td>{{$data->book_subject}}</td>
                 <td>
-                  <a href="{{url('booksedit/'.$data->book_id)}}" class="btn btn-success">EDIT</a>
+                  <a href="{{url('book-edit/'.$data->book_id)}}" class="btn btn-success">EDIT</a>
                 </td>
                 <td>
                   <a href="javascript:void(0)" class="btn btn-danger deletebtn">DELETE</a>
                 </td>
               </tr>
+              <?php $num = $num+1; ?>
               @endforeach
               {{$books->links()}}
             </tbody>
@@ -155,7 +166,7 @@
 
         $('#delete_books_id').val(data[0]);
 
-        $('#delete_modal_form').attr('action','/books-delete/'+data[0]);
+        $('#delete_modal_form').attr('action','/book-delete/'+data[0]);
 
         $('#deletemodalpop').modal('show');
       });
