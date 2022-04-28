@@ -10,56 +10,54 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-         //***START***
+  //***START***
   Route::get('/','auth\LoginController@show');
   Auth::routes();
 
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('/authenticity', 'HomeController@show');
-  //Route::get('/','Admin\DashboardController@show');
 
-                    //**ADMIN**
+//**ADMIN**
 Route::group(['middleware'=>['auth','admin']], function(){
-                    //**ADMIN-DASHBOARD**
-     //Route::get('/','Admin\DashboardController@show');
+     //**ADMIN-DASHBOARD**
      Route::get('/dashboard','Admin\DashboardController@show');
 
-                    //**ADMIN CRUD**
+     //**ADMIN CRUD**
      Route::get('/users','Admin\DashboardController@showUsers');
      Route::get('/role-edit/{id}','Admin\DashboardController@registerEdit');
      Route::put('role-update/{id}','Admin\DashboardController@registerUpdate');
-     Route::delete('/user-delete/{id}','Admin\DashboardController@Delete');
+     Route::delete('/user-delete/{id}','Admin\DashboardController@delete');
 
-                    //**ABOUT US PAGE**
+     //**ABOUT US PAGE**
      Route::get('/abouts','Admin\AboutusController@index');
 
-                    //**BOOKS CRUD**
+     //**BOOKS CRUD**
      Route::get('/books','Admin\BooksController@index');
-     Route::post('/save-books','Admin\BooksController@save');
-     Route::get('/booksedit/{book_id}','Admin\BooksController@edit')->name('booksedit');
+     Route::post('/save-book','Admin\BooksController@save');
+     Route::get('/book-edit/{book_id}','Admin\BooksController@edit')->name('booksedit');
      Route::put('/books-update/{book_id}','Admin\BooksController@update');
-     Route::delete('/books-delete/{book_id}','Admin\BooksController@delete');
+     Route::delete('/book-delete/{book_id}','Admin\BooksController@delete');
      Route::get('/search','Admin\BooksController@search');
 
-                    //**FINE DETAILS**
+     //**FINE DETAILS**
      Route::get('/fine','IssueController@fine');
 });
 
 
-                  //**STUDENT**
+//**STUDENT**
 Route::group(['middleware'=>['auth','student']], function(){
-                  //**DASHBOARD**
+     //**DASHBOARD**
      Route::get('/student-dashboard','Nonadmin\DashboardController@show');
 
-                  //**USER-PROFILE**
-     Route::get('/studentprofile/{id}','Nonadmin\DashboardController@index');
+     //**USER-PROFILE**
+     Route::get('/student-profile/{id}','Nonadmin\DashboardController@showProfile');
      Route::put('/student-profile-update/{id}','Nonadmin\DashboardController@profileUpdate');
 
-                  //**BOOKS-ISSUE**
+     //**BOOKS-ISSUE**
      Route::get('/studentbooks','IssueController@studentIndex');
      Route::get('/issueupdate/{book_id}','Nonadmin\DashboardController@issueBook');
 
-                  //**BOOKS-REISSUE-RETURN**
+     //**BOOKS-REISSUE-RETURN**
      Route::get('/reissueupdate/{id}/{book_id}','Nonadmin\DashboardController@reissueBook');
      Route::get('/finebooks','IssueController@fineBooks');
      Route::match(['get', 'delete'],'/return/{id}/{book_id}','Nonadmin\DashboardController@return');
