@@ -23,7 +23,7 @@ class DashboardController extends Controller
       return view('nonadmin.dashboard');
     }
 
-    public function index($id)
+    public function showProfile($id)
     {
       try {
         $users     = User::findOrFail($id);
@@ -32,19 +32,21 @@ class DashboardController extends Controller
       } catch (Exception $e) {
         echo $e->getMessage();
       }
+
+
     }
 
     public function profileUpdate(Profile $request,$id)
     {
+      $request->validated();
       try {
-        $request->validated();
-        $users     = User::profileUpdate($request,$id);
-        return view('nonadmin.profile')
-              ->with('users',$users)
-              ->with('status','Your profile is Updated');
+        $users = User::profileUpdate($request,$id);
       } catch (Exception $e) {
         echo $e->getMessage();
       }
+      return redirect('/student-profile/'.$id)
+            ->with('users',$users)
+            ->with('status','Your profile is Updated');
     }
 
 
@@ -57,7 +59,7 @@ class DashboardController extends Controller
           } catch (Exception $e) {
               DB::rollback();
               return redirect('/studentbooks')
-                     ->with('status','Your book is not issued');
+                     ->with('status','Your book is not issued due to some internal error');
               // Handle Exception
           }
           DB::commit();
@@ -70,12 +72,13 @@ class DashboardController extends Controller
       {
         try{
           Issue::createReissue($book_id);
-          return view('nonadmin.bookfine')
-                 ->with('status','Your book is reissued');
         } catch (Exception $e) {
           return view('nonadmin.bookfine')
-                 ->with('status','Your book is not reissued');
+                 ->with('status','Your book is not reissued due to some internal error');
         }
+
+        return view('nonadmin.bookfine')
+               ->with('status','Your book is reissued');
       }
 
       public function return(Request $request,$id,$book_id)

@@ -15,18 +15,26 @@ use DB;
 
 class IssueController extends Controller
 {
+
   public function studentIndex()
   {
-    $data=Issue::studentIndex();
+    try {
+      $data=Issue::studentIndex();
+    }  catch (Exception $e) {
+      echo $e->getMessage();
+    }
+
     return view('nonadmin.bookissue')->with('data',$data);
   }
+
   public function fine()
   {
     $data=Issue::adminFine();
+    $date            = time();
+    $date            = (int)$date;
     foreach ($data as $d)
     {
-          $date            = time();
-          $date            = (int)$date;
+
           $returnDate      = (int)$d->return_date;
 
           if($returnDate<$date)
@@ -37,16 +45,19 @@ class IssueController extends Controller
             $d->fine       = 0;
           }
     }
+
     return view('admin.fine',compact('data'));
   }
 
   public function fineBooks()
   {
     $data=Issue::fineBooks();
+    $date            = time();
+    $date            = (int)$date;
+
     foreach ($data as $d)
     {
-          $date            = time();
-          $date            = (int)$date;
+
           $returnDate      = (int)$d->return_date;
 
           if($returnDate<$date)
@@ -57,6 +68,7 @@ class IssueController extends Controller
             $d->fine       = 0;
           }
     }
+    
     return view('nonadmin.bookfine')->with('data',$data);
   }
 
