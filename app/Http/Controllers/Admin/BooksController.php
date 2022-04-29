@@ -96,6 +96,14 @@ class BooksController extends Controller
 
     public function delete($book_id)
     {
+      $book = Books::findOrFail($book_id);
+
+      if($book->status == 'y')
+      {
+        return redirect('/books')
+              ->with('status','Can not delete issued book');
+      }
+
       try {
           Books::deleteBooks($book_id);
       } catch (Exception $e)
@@ -103,8 +111,9 @@ class BooksController extends Controller
         echo $e->getMessage();
       }
 
-      return redirect('books')
-            ->with('status','Data Deleted for Books');
+
+     return redirect('/books')
+           ->with('status','Data Deleted for Books');
     }
 
     public function search(SearchRequest $request)
