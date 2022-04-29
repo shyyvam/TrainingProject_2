@@ -114,6 +114,7 @@
             <thead class=" text-primary">
             <?php $num=1; ?>
               <th>S.No</th>
+              <th>ID</th>
               <th>Book Name</th>
               <th>Book Author</th>
               <th>Book Version</th>
@@ -125,6 +126,7 @@
               @foreach($books as $data)
               <tr>
                 <td>{{$num}}</td>
+                <td>{{$data->book_id}}</td>
                 <td>{{$data->book_name}}</td>
                 <td>{{$data->book_author}}</td>
                 <td>{{$data->book_version}}</td>
@@ -164,9 +166,9 @@
 
         //console.log(data);
 
-        $('#delete_books_id').val(data[0]);
+        $('#delete_books_id').val(data[1]);
 
-        $('#delete_modal_form').attr('action','/book-delete/'+data[0]);
+        $('#delete_modal_form').attr('action','/book-delete/'+data[1]);
 
         $('#deletemodalpop').modal('show');
       });
