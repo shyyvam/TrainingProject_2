@@ -5,6 +5,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -66,6 +67,12 @@ class DashboardController extends Controller
 
     public function delete($id)
     {
+      if($id == Auth::user()->id)
+      {
+        return redirect('/users')
+              ->with('status','Can not delete logged in account');
+      }
+
       try {
           User::registerDelete($id);
       } catch (Exception $e) {
