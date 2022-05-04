@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 
 class Books extends Model
@@ -22,12 +23,22 @@ class Books extends Model
 
     public static function deleteBooks($book_id)
     {
+      if (empty($book_id))
+      {
+        throw new Exception("Books cannot be deleted!");
+      }
+
       $books = Books::findOrFail($book_id);
       return $books->delete();
     }
 
     public static function findId($book_id)
     {
+      if (empty($book_id))
+      {
+        throw new Exception("Book id was null!");
+      }
+
       return Books::findOrFail($book_id);
     }
 
@@ -46,6 +57,10 @@ class Books extends Model
 
     public static function editBooks($book_id)
     {
+      if (empty($book_id))
+      {
+        throw new Exception("Books cannot be edited!");
+      }
       $books = Books::findOrFail($book_id);
       return $books;
     }
@@ -65,6 +80,11 @@ class Books extends Model
 
     public static function updateRecord($book_id)
     {
+        if (empty($book_id))
+        {
+          throw new Exception("Books cannot be updated!");
+        }
+
         $book          = Books::findOrFail($book_id);
         $book->status  = self::$issued;   //setting status of book as issued
 
@@ -73,6 +93,10 @@ class Books extends Model
 
     public static function updateIssue($book_id)
     {
+        if (empty($book_id))
+        {
+          throw new Exception("Books cannot be updated!");
+        }
         $book          = Books::findOrFail($book_id);
         $book->status  = self::$not_issued;   //setting status of book as not issued
 
