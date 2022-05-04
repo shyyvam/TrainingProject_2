@@ -46,11 +46,11 @@ class User extends Authenticatable
       return $users;
     }
 
-    public static function registerUpdate($request,$id)
+    public static function registerUpdate($name,$usertype,$id)
     {
           $users          = User::findOrFail($id);
-          $users->name    = $request->input('username');
-          $users->usertype= $request->input('usertype');
+          $users->name    = $name;
+          $users->usertype= $usertype;
           $users->update();
 
           return redirect('/role-edit/'.$id)
@@ -63,12 +63,12 @@ class User extends Authenticatable
       return $users->delete();
     }
 
-    public static function profileUpdate($request,$id)
+    public static function profileUpdate($name,$email,$phone_number,$id)
     {
         $users              = User::findOrFail($id);
-        $users->name        = $request->input('username');
-        $users->email       = $request->input('email');
-        $users->phone_number= $request->input('phone_number');
+        $users->name        = $username;
+        $users->email       = $email;
+        $users->phone_number= $phone_number;
         return $users->update();
 
     }
