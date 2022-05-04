@@ -17,6 +17,8 @@ class Books extends Model
                                  'book_subject'];
     protected $primaryKey     = 'book_id';
     public static $paginateValue     = 5;
+    public static $issued     = 'y';
+    public static $not_issued = 'n';
 
     public static function deleteBooks($book_id)
     {
@@ -24,13 +26,18 @@ class Books extends Model
       return $books->delete();
     }
 
-    public static function saveBooks($request)
+    public static function findId($book_id)
+    {
+      return Books::findOrFail($book_id);
+    }
+
+    public static function saveBooks($name,$author,$version,$subject)
     {
           $books                 = new Books;
-          $books->book_name      = $request->input('title');
-          $books->book_author    = $request->input('author');
-          $books->book_version   = $request->input('version');
-          $books->book_subject   = $request->input('subject');
+          $books->book_name      = $title;
+          $books->book_author    = $author;
+          $books->book_version   = $version;
+          $books->book_subject   = $subject;
           $books->save();
 
           return redirect('/books')
@@ -43,13 +50,13 @@ class Books extends Model
       return $books;
     }
 
-    public static function updateBooks($request,$book_id)
+    public static function updateBooks($name,$author,$version,$subject,$book_id)
     {
           $books                = Books::findOrFail($book_id);
-          $books->book_name     = $request->input('title');
-          $books->book_author   = $request->input('author');
-          $books->book_version  = $request->input('version');
-          $books->book_subject  = $request->input('subject');
+          $books->book_name     = $name;
+          $books->book_author   = $author;
+          $books->book_version  = $version;
+          $books->book_subject  = $subject;
           $books->update();
 
           return redirect('/booksedit/'.$book_id)
@@ -59,7 +66,7 @@ class Books extends Model
     public static function updateRecord($book_id)
     {
         $book          = Books::findOrFail($book_id);
-        $book->status  = 'y';
+        $book->status  = self::$issued;   //setting status of book as issued
 
         return $book->save();
     }
@@ -67,14 +74,13 @@ class Books extends Model
     public static function updateIssue($book_id)
     {
         $book          = Books::findOrFail($book_id);
-        $book->status  = 'n';
+        $book->status  = self::$not_issued;   //setting status of book as not issued
 
         return $book->save();
     }
 
-    public static function searchBooks($request)
+    public static function searchBooks($search)
     {
-      $search   = $request->get('search');
       $books    = DB::table('books')
                 ->where('book_name','like','%'.$search.'%')
                 ->orWhere('book_subject','like','%'.$search.'%')
