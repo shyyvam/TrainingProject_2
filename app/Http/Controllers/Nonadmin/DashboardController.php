@@ -39,11 +39,17 @@ class DashboardController extends Controller
     public function profileUpdate(Profile $request,$id)
     {
       $request->validated();
+
+      $name         = $request->input('username');
+      $email        = $request->input('email');
+      $phone_number = $request->input('phone_number');
+
       try {
-        $users = User::profileUpdate($request,$id);
+        $users = User::profileUpdate($name,$email,$phone_number,$id);
       } catch (Exception $e) {
         echo $e->getMessage();
       }
+
       return redirect('/student-profile/'.$id)
             ->with('users',$users)
             ->with('status','Your profile is Updated');

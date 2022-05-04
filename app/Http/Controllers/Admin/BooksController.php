@@ -14,7 +14,7 @@ class BooksController extends Controller
 {
     public $paginateValue = 5;
 
-    public function index()
+    public function showBooks()
     {
       try {
           $books = Books::paginate($this->paginateValue);
@@ -45,8 +45,13 @@ class BooksController extends Controller
                -> with('status','Data not Added for Books');
        }
 
+       $name     = $request->input('title');
+       $author   = $request->input('author');
+       $version  = $request->input('version');
+       $subject  = $request->input('subject');
+
       try {
-          Books::saveBooks($request);
+          Books::saveBooks($name,$author,$version,$subject);
       } catch (Exception $e) {
         echo $e->getMessage();
     }
@@ -85,8 +90,13 @@ class BooksController extends Controller
                -> with('status','Data not Updated for Books');
        }
 
+       $name     = $request->input('title');
+       $author   = $request->input('author');
+       $version  = $request->input('version');
+       $subject  = $request->input('subject');
+
       try {
-          Books::updateBooks($request,$book_id);
+          Books::updateBooks($name,$author,$version,$subject,$book_id);
       } catch (Exception $e) {
         echo $e->getMessage();
       }
@@ -96,7 +106,7 @@ class BooksController extends Controller
 
     public function delete($book_id)
     {
-      $book = Books::findOrFail($book_id);
+      $book = Books::findId($book_id);
 
       if($book->status == 'y')
       {
@@ -106,11 +116,11 @@ class BooksController extends Controller
 
       try {
           Books::deleteBooks($book_id);
+
       } catch (Exception $e)
       {
         echo $e->getMessage();
       }
-
 
      return redirect('/books')
            ->with('status','Data Deleted for Books');
@@ -120,7 +130,8 @@ class BooksController extends Controller
     {
       try {
           $request->validated();
-          $books    = Books::searchBooks($request);
+          $search   = $request->get('search');
+          $books    = Books::searchBooks($search);
      } catch (Exception $e) {
        echo $e->getMessage();
      }

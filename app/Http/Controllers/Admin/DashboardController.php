@@ -56,8 +56,11 @@ class DashboardController extends Controller
                -> with('status','Data not updated for Users');
        }
 
+      $name     = $request->input('username');
+      $usertype = $request->input('usertype');
+
       try {
-          User::registerUpdate($request,$id);
+          User::registerUpdate($name,$usertype,$id);
       } catch (Exception $e) {
         echo $e->getMessage();
       }
