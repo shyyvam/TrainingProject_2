@@ -45,6 +45,11 @@ class Issue extends Model
 
   public static function createIssue($book_id) {
       //$this->validate();
+      if (empty($book_id))
+      {
+        throw new Exception("Bookid cannot be found!");
+      }
+
       $issue              = new self();
       $date               = date("d.m.y");
       $issue->issue_date  = time();
@@ -58,6 +63,11 @@ class Issue extends Model
 
   public static function createReissue($book_id)
   {
+    if (empty($book_id))
+    {
+      throw new Exception("Bookid cannot be found!");
+    }
+
     $issue                = Issue::findOrFail($book_id);
     $date                 = date("d.m.y");
     $return_date          = strtotime($date.'+7 days');
@@ -88,6 +98,11 @@ class Issue extends Model
 
   public static function deleteIssue($id)
   {
+    if (empty($book_id))
+    {
+      throw new Exception("Bookid cannot be found!");
+    }
+
     $issue = Issue::findOrFail($id);
     return $issue->delete();
   }
