@@ -32,7 +32,7 @@ Route::group(['middleware'=>['auth','admin']], function(){
      Route::get('/abouts','Admin\AboutusController@index');
 
      //**BOOKS CRUD**
-     Route::get('/books','Admin\BooksController@index');
+     Route::get('/books','Admin\BooksController@showBooks');
      Route::post('/save-book','Admin\BooksController@save');
      Route::get('/book-edit/{book_id}','Admin\BooksController@edit')->name('booksedit');
      Route::put('/books-update/{book_id}','Admin\BooksController@update');
